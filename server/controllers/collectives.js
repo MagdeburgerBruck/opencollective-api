@@ -218,6 +218,7 @@ export const create = (req, res, next) => {
       return models.User.findOne({ where: { id: collectiveData.HostId || defaultHostUser().id }}).tap(h => {
         host = h;
         collective.HostCollectiveId = h.CollectiveId;
+        collective.currency = h.currency;
         collective.save();
         _addUserToCollective(collective, h, { role: roles.HOST, remoteUser: creator })
         return null;
